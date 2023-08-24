@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "get-youtube-data"
+version = "0.1.0"
+description = "Remind"
+authors = ["2044smile <2044smile@naver.com>"]
+readme = "README.md"
+packages = [{include = "get_youtube_data"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+google-api-python-client = "^2.97.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

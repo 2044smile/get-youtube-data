@@ -9,6 +9,7 @@ packages = [{include = "get_youtube_data"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 google-api-python-client = "^2.97.0"
+pandas = "^2.0.3"
 
 
 [build-system]

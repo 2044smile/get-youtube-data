@@ -34,7 +34,7 @@ class YouTube:
         :param channel_id:
         :return: googleapiclient playlist['items']
 
-        유튜버가 가지고 있는 재생목록의 플레이 리스트를 제공합니다.
+        유튜버가 가지고 있는 재생 목록의 플레이 리스트를 제공합니다.
         """
         playlist = self.youtube.playlists().list(
             channelId=channel_id,
@@ -45,6 +45,12 @@ class YouTube:
         return playlist['items']
 
     def get_my_selected_youtube_playlists(self, playlist_id: str):
+        """
+        :param playlist_id:
+        :return: playlist_items
+
+        유튜버가 가지고 있는 재생 목록에서 보고 싶은 플레이 리스트를 선택하면 플레이 리스트 안에 있는 데이터를 return.
+        """
         playlist_items = self.youtube.playlistItems().list(
             part="snippet,contentDetails",
             playlistId=playlist_id,

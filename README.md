@@ -16,4 +16,4 @@ poetry run python get_test_data.py -c 곽튜브 -n 0
 
 ## Reference
 
-['google-api-python-client'](https://google-api-client-libraries.appspot.com/documentation/youtube/v3/python/latest/)
+* [google-api-python-client](https://google-api-client-libraries.appspot.com/documentation/youtube/v3/python/latest/)

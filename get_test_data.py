@@ -22,6 +22,11 @@ def make_playlist_csv(playlist: list, channel_name: str):
     df.to_csv(f"/Users/cslee/vscode/get-youtube-data/csv/{channel_name}_재생목록.csv")
 
 
+def make_videos_csv(stats_list: list, channel_name: str, playlist_title: str):
+    df = pd.DataFrame(stats_list)
+    df.to_csv(f"/Users/cslee/vscode/get-youtube-data/csv/{channel_name}_{playlist_title}_영상들.csv")
+
+
 class YouTube:
     def __init__(self):
         developer_key = os.getenv('YOUTUBE_DEVELOPER_KEY')
@@ -112,7 +117,13 @@ class YouTube:
                 published = video['snippet']['publishedAt']
                 play_time = video['contentDetails']['duration']
 
-        return print('x')
+                stats_dict = dict(
+                    url_pk=url_pk, channel_id=channel_id, title=title, description=description, thumbnails=thumbnails,
+                    view_count=view_count, like_count=like_count, published=published, play_time=play_time
+                )
+                stats_list.append(stats_dict)
+
+        return stats_list, video['snippet']['channelTitle']
 
 
 parser = argparse.ArgumentParser(description="유튜브 채널 이름을 입력해 주세요. EX) 곽튜브, 빠니보틀")
@@ -125,11 +136,15 @@ if args.channel == '빠니보틀':
     target = youtube.get_all_youtube_playlists(channel_id='UCNhofiqfw5nl-NeDJkXtPvw')
     make_playlist_csv(target, channel_name='빠니보틀')
     if args.number:
-        youtube.get_my_selected_youtube_playlists(playlist_id=target[int(args.number)]['id'])
+        youtube_video_list, channel_title = youtube.get_my_selected_youtube_playlists(
+            playlist_id=target[int(args.number)]['id'])
+        make_videos_csv(youtube_video_list, channel_title, target[int(args.number)]['snippet']['title'])
 elif args.channel == '곽튜브':
     target = youtube.get_all_youtube_playlists(channel_id='UClRNDVO8093rmRTtLe4GEPw')
     make_playlist_csv(target, channel_name='곽튜브')
     if args.number:
-        youtube.get_my_selected_youtube_playlists(playlist_id=target[int(args.number)]['id'])
+        youtube_video_list, channel_title = youtube.get_my_selected_youtube_playlists(
+            playlist_id=target[int(args.number)]['id'])
+        make_videos_csv(youtube_video_list, channel_title, target[int(args.number)]['snippet']['title'])
 else:
     print("유튜브 채널 이름을 입력해 주세요.")

@@ -132,6 +132,11 @@ parser.add_argument('-n', '--number')
 args = parser.parse_args()
 
 youtube = YouTube()
+"""
+target 에는 재생목록 리스트가 들어있다.
+target[int(args.number)]['id'] 재생목록 id 를 가져온다.
+target[int(args.number)]['snippet']['title'] 제목을 가져온다. EX) 1-유라시아 여행 
+"""
 if args.channel == '빠니보틀':
     target = youtube.get_all_youtube_playlists(channel_id='UCNhofiqfw5nl-NeDJkXtPvw')
     make_playlist_csv(target, channel_name='빠니보틀')

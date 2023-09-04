@@ -89,7 +89,7 @@ class YouTube:
         :param playlist_id:
         :return: playlist_items
 
-        유튜버가 가지고 있는 재생 목록에서 보고 싶은 플레이 리스트를 선택하면 플레이 리스트 안에 있는 유튜브 영상 데이터를 return.
+        플레이 리스트 안에 있는 유튜브 영상의 상세 정보 데이터를 return.
         """
         stats_list = []
         stats_dict = {}
